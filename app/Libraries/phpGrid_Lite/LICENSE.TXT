@@ -1,0 +1,36 @@
+phpGrid END USER LICENSE AGREEMENT (EULA)
+
+THIS IS A LEGAL AGREEMENT BETWEEN YOU, THE END USER, AND phpGrid. IF YOU DO NOT AGREE TO THE TERMS OF THIS AGREEMENT, DO NOT DOWNLOAD OR USE THIS SOFTWARE.
+
+PHPGRID SOFTWARE LICENSE AGREEMENT
+
+COPYRIGHT
+The software is not open source or freeware. The phpGrid software is protected by the copyright laws of United States and by international treaty provisions. You may not distribute the software or any parts of it.
+
+LICENSE
+The software is licensed for exclusive and non-transferable use. A licensed copy of the software may be used for an unlimited amount of time without any monthly fees. For each installed instance of the software, a separate license is required unless the multi-user licenses bundle deal has been purchased, thus the a simple copy of the software can be installed up to multiple different machines depending on the license type.
+
+SOFTWARE MODIFICATIONS
+Although phpGrid does not have restriction on modifying the software by the end user, due to the nature of scripting programming language, the source code of phpGrid is easily exposed to the end user, thereafter, phpGrid does NOT provide support of any sort if users have modified the source code of the software in any way.
+
+WARRANTY DISCLAIMER AND LIMITATION OF LIABILITY
+It is our intention to provide the best software to the users but there is no software is error free. The software and the other accompanying files, or the special editions of the software, are provided “AS IS” BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND. In no event shall phpGrid be liable for any damages whatsoever (including, without limitation, lost profits, business interruption or lost information) resulting from the use of or inability to use the software.
+
+REFUND POLICY
+We provide a free version of our software for your convenience to evaluate our products. During your evaluation period, our support staff is available to assist in installation and configuration via email. We strongly recommend that all users download, install, and test the free versions prior to making a purchase.
+
+If you purchase one of our products, after your credit card or check is approved, an email with phpGrid full version download instruction will be sent to you. You have 30 days for a full refund starting from the date of purchase if you are not satisfied. After 30 days,  there will be no refunds given.
+
+Please send any questions regarding our refund policy to support@phpgrid.com.
+
+GENERAL
+phpGrid respects your privacy. We do NOT sell, share or rent any customer information to others. When you supply information about you for a specific purpose, the information will be used for that purpose only. We NEVER share your information with any other third-party companies.
+
+Failure to comply with this license agreement will result in immediate termination of your license without refund. You will also be held responsible for any loss in business caused to phpGrid. This license will be governed by and construed in accordance with the laws of United States.
+
+ABOUT SELECT2
+Select2 is distributed under Apache License, Version 2.0.
+
+Team phpGrid.
+http://www.phpgrid.com
+e-mail: support@phpgrid.com

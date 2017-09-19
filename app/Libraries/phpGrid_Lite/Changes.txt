@@ -1,0 +1,248 @@
+phpGrid 6
+
+- enable_edit
+Added a 3rd parameter for user defined edit script file name other than the default "edit.php" file. Note that the user defined edit file is NOT automatically passed to detail and subgrid. In most cases, you do not need to use your own edit script rather than simply modify edit.php (requires Enterprise or Universal license for source code).
+
+- set_col_dynalink
+now works with local array
+
+- cls_database.php
+db2-dsnless
+Now supports DB2 DSN-less as database type. Thanks, Jon Paris!
+odbc_mssql_native
+"odbc_mssql_native" DB_TYPE for SQL Server Native ODBC driver
+"odbc_mssql" should be used for ***DSN-only connectivity *** on *nix, OS X using unixODBC through FreeTDS.
+unixODBC requires environment variables in conf.php
+  putenv("ODBCINSTINI=/usr/local/Cellar/unixodbc/2.3.1/etc/odbcinst.ini");
+  putenv("ODBCINI=/usr/local/Cellar/unixodbc/2.3.1/etc/odbc.ini");
+
+unixODBC is DSN connection only with the following .conf and .ini files. I used Amazon RDS MSSQL instance during testing.
+
+   /usr/local/Cellar/freetds/0.91/etc/freetds.conf
+
+   # server specific section
+    [global]
+    # TDS protocol version
+    ; tds version = 4.2
+
+    # Whether to write a TDSDUMP file for diagnostic purposes
+    # (setting this to /tmp is insecure on a multi-user system)
+    ; dump file = /tmp/freetds.log
+    ; debug flags = 0xffff
+
+    # Command and connection timeouts
+    ; timeout = 10
+    ; connect timeout = 10
+
+    # If you get out-of-memory errors, it may mean that your client
+    # is trying to allocate a huge buffer for a TEXT field.
+    # Try setting 'text size' to a more reasonable limit
+    text size = 64512
+
+    [phpgridmssql]
+    host = phpgridmssql.cbdlprkhjrmd.us-west-1.rds.amazonaws.com
+    port = 1433
+    tds version = 7.0
+   /usr/local/Cellar/unixodbc/2.3.1/etc/odbc.ini
+
+   [phpgridmssql]
+    Description = MS SQL Server
+    Driver = FreeTDS
+    Server = phpgridmssql.cbdlprkhjrmd.us-west-1.rds.amazonaws.com
+    TraceFile = /tmp/sql.log
+    UID = mssqluser
+    PWD = PASSWORD
+    ReadOnly = No
+    Port = 1433
+   Database = sampledb
+   /usr/local/Cellar/unixodbc/2.3.1/etc/odbcinst.ini
+
+   [FreeTDS]
+    Description = FreeTDS
+    Driver = /usr/local/Cellar/freetds/0.91/lib/libtdsodbc.so
+    Setup = /usr/local/Cellar/freetds/0.91/lib/libtdsodbc.so
+    FileUsage = 1
+    CPTimeout =
+    CPResuse =
+    client charset = utf-8
+
+- conf.php
+Add "PHPGRID" to prefix all DB constant to avoid potential name collisons with other systems and frameworks. eg. Wordpress uses DB_NAME variable.
+
+- SQL Server
+The cells with NULL value repeat the value from the previous row has been fixed due to a bug in ADOdb (server/adodb5/adodb.inc.php), our database abstract class library.
+
+- before_script_end public variable
+Added public variable 'before_script_end'. It can be 'hooked' into the display when ALL the DOM elements are ready.
+
+- cust_prop_jsonstr (known as ud_params pre-version six)
+example: filter_grid_on_pageload.php
+Not that it's NOT possible to use set_grid_property function for the particular filter example because the filters must be passed as string to data.php via POST for the filter to work. However, this example is significant because it's illustrates it is possible to persist search criteria even user navigates to another page and comes back to phpGrid.
+Example:
+$dg->cust_prop_jsonstr = 'toppager:true,';  // clone toolbar to top
+
+- set_grid_property
+Parameters:
+$grid_property: An array represents grid property. The property will add to or overwrite existing properties already defined by phpGrid.
+Description:
+Advanced method. Set custom datagrid properties. The parameter must be an array. You must be rather familiar jqGrid API in order to take advantage of this method effectively. In most cases, you do not need to use this method. Note that this method is not the same as set_grid_method, another advanced phpGrid method.
+Example:
+$dg -> set_grid_property(array('search'=>true));
+
+- set_grid_method
+It now takes variable arguments. The changes make the function more flexible with different jqGrid methods with variable arguments. Super useful. :)
+
+- INLINE edit improvement:
+checkbox now display as checkbox,
+new blank row when add.
+auto refresh grid after add.
+WYSIWYG support
+
+- set_edit_condition
+Set row-level edit condition for edition permission.
+Note:
+1. that this works for INLINE ONLY by hiding the edit icons using javascript, CSS
+2. For that reason, developers should still validate user permission at the database or on the server side.
+3. In more complicate condition, it's recommended to create your condition at run-time
+Parameter:
+     array(column => compare_operand, '&& OR ||', column2 => compare_operand, '&& OR ||'.....)
+Usage example:
+     $dg->enable_edit('INLINE', 'CRUD')->set_edit_condition(array('status'=>'!="Shipped"', '&&', 'customerNumber'=>'==129' ));
+Example of generated javascript conditon:
+     if $column = "status", $compare_operand = " == 'Shipped'", then it ouputs: if($("#orders").jqGrid("getCell", rowId, "status") == "Shipped"){
+
+Example file: custom_edit_conditon.php
+
+- Composite PK support (Enterprise+)
+This is a major feature in version 6. Lots of development time devoted to support composite PK, and yet making it simple at the same time. In stead of passing a single string variable in the constructor as the primary key, you can now pass an array of strings as the composite primary key. For a single primary key, you can still use a string or an array with a single string value. e.g.
+
+composite primary key:
+$sdg = new C_DataGrid("SELECT * FROM orderdetails", array("productCode", "orderNumber"), "orderdetails");
+
+single primary key
+$dg = new C_DataGrid("SELECT * FROM orders", "orderNumber", "orders");
+- OR -
+$dg = new C_DataGrid("SELECT * FROM orders", array("orderNumber"), "orders");
+
+
+Note that composite PK is not supported for foreign key referencial in master/detail and subgrid.
+
+- set_col_edittype
+Use index number 0 and 1 instead of column name to retrieve data value in "select" edit type. This allows more complex SQL statement such as CONCAT.
+
+- Conditional format
+Fixed bug in subgrid due to "+" column
+
+- set_masterdetail
+The 2rd parameter is finally working as intended. It no longer has to be the same name as the master primary key. It was never implemented.
+Í
+
+- New premium themes! (Enterprise+)
+aristo
+cobalt
+retro
+You gonna like it!
+
+- global theme support
+THEME global constant in conf.php to set theme for all the grids. The global theme can be overwriten with set_theme
+
+- load error display
+added primvate loadError property. The error occurred during load will be displayed.
+
+- set_sortablerow
+activate sortable row. drag and drop row to sort.
+
+- toolbar search
+Changed default value from "equal" to "contain"
+
+- jqGrid 4.5.2 support
+Updated with latest jqGrid library
+
+- Subgrid
+Now support nested/drill-down subgrid!!
+
+- FORM & INLINE edit
+respects edit_options flags
+
+- Autocomplete support!
+
+- enable_columnchooser
+
+- enable_autowdith
+automatically resize based on window width - one step closer to an Excel-like editor.
+
+- enabled_autoheight
+Supported!
+
+- datepicker
+Display changeMonth and changeYear dropdown
+
+- DEBUG globally constant
+Server error now displays when DEBUG is true in conf.php
+
+
+
+phpGrid 5.5
+
+1. advanced search is now supported in detail grid
+2. now support array parameter in set_col_dynalinks.It's also backward compatible.
+	$dynaParam (old $idName) can be a string or an array width dynamic value
+	$addParam are parameters with static value
+3. display_script_includeonce scope is now public (better MVC framework compability)
+	$dg->display_script_includeonce(true);
+4. better Oracle database support
+	define(PHPGRID_DB_TYPE, 'oci805');
+5. updated to latest ADOdb library 5.1.8
+6. added toolbar search dropdown support
+7. phpChart integration example added!
+8. PDF, CSV export format are now supported by requests!
+9. performance optimzation with large datasets
+10. now supports virtual columns, AKA caclulated field!
+11. added support for custom validation by requests!
+	set_col_customrule
+12. array data source is now (finally) supported!
+	export, subgrid and master detail grids are not supported
+13. bug fix: Master Detail INLINE edit not working in master grid due to mulitple onSelectRow event handler.
+14. bug fix: $grid not defined
+15. bug fix: Only variable can have & since PHP5
+16. bug fix: set_col_edittype now works with non-integer key
+17. bug fix: conditional format when multiple select is true
+
+
+phpGrid 5.0
+0. upgrade to jqgrid 4.4
+1. added column format type: date and checkbox
+	date attribute
+		$dg->set_col_format('orderDate', "date", 
+			array('srcformat'=>'Y-m-d','newformat'=>'n/j/Y'));
+		//or
+		// 3rd is the datepicker dateformat. Note the format is different
+		$dg->set_col_date("orderDate", "Y-m-d", "n/j/Y", "m/dd/yy");
+	checkbox 
+		$dg->set_col_format('isClosed', "checkbox");	// should only used for read only grid
+2. added sqlite driver 
+3. chained methods for:
+	setters 
+	enablers.
+4. advanced methods:
+	set_col_property
+	add_event (new exmaple added)
+5. set_col_edit_dimension
+	e.g. $dg->set_col_edit_dimension("comments", 50, 10);
+	e.g. $dg->set_col_edit_dimension("status", 40);
+	example: column_text_edit_dimension.php
+6. file upload (beta)
+	edit must be enabled
+	FORM mode only
+	fiel system upload only, no BLOB
+	the file folder must allow write permission
+	One file upload supported per form
+	file name column should be able to allow NULL value
+7. wysiwyg example added
+8. Search bug fix (OR operator)
+9. 10 new custom themes, and old theme enhancement!
+10. updated them roller example with dropdowns to change theme
+11. Now support ability to call javascript function from hyperlink
+	Added "hyperlink_click_event" example: hyperlink onclick to call javascript function 
+12. set_col_img
+	add 2nd parameter to set base image URL. Only a single image base url is supported per grid
