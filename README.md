@@ -5,7 +5,7 @@
 
 2)	(once clonning done go to project folder and run) *composer update*
 
-3)	Create and Change Database name from .env file (if .env file is not there please)
+3)	Create and Change Database name from .env file from root folder (if .env file is not there please create .env file)
 
 4)	Run the command to get database tables:  *php artisan migrate*
 
