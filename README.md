@@ -13,7 +13,18 @@
 
 6)	Than run *php artisan serve*
 
-7)	Now hit the localhost with *localhost:8000* in your brower
+7)	Now hit the localhost with *localhost:8000* in your brower for front end panel
+
+8)	For Admin panel -- *localhost:8000/admin* in your brower for Admin panel 
+
+**Login Credential for Admin**
+
+	Email: ynandan55@gmail.com --- password: 123456
+
+**Login Credential for Admin**
+
+	Please register yourself and login with your Credential
+	
 
 **Main Components**
 
