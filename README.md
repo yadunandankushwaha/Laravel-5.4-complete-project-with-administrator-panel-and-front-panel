@@ -20,8 +20,10 @@
 **Login Credential for Admin**
 
 	Email: ynandan55@gmail.com --- password: 123456
+	
+	(NOTE: if you are Getting error (Call to undefined method Illuminate\Session\Store::getToken()) in admin login page then please rename the function getToken() to token() and the file will be located in *vendor\laravelcollective\html\src\HtmlServiceProvider.php*)
 
-**Login Credential for Admin**
+**Login Credential for User**
 
 	Please register yourself and login with your Credential
 	
