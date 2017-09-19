@@ -9,7 +9,7 @@
 
 4)	Run the command to get database tables:  *php artisan migrate*
 
-5)	Run seeder to insert data in tables eg. *php artisan db:seed --class=UsersTableSeeder* (please check seeder folder to run and get more data in database tables like i did aove for user table)
+5)	Run seeder to insert data in tables eg. *php artisan db:seed --class=UsersTableSeeder* (please check seeder folder to run and get more data in database tables like i did above for user table)
 
 6)	Than run *php artisan serve*
 
