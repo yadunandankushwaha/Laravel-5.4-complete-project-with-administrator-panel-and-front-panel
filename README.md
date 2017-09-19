@@ -44,9 +44,11 @@
 
 3)	*User Registration*
 
-4)	*Add-update-edit-delete blog*
+4)	*Manage Dashboard and Settings*
 
-5)	*Blogs comment system*
+5)	*Add-update-edit-delete blog*
+
+6)	*Blogs comment system*
 
 **Administration Panel**
 
