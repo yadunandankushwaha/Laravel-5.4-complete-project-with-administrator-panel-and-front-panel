@@ -1,5 +1,5 @@
 
-**How its work** (how to get the project into your system please follow the below steps one by one)
+**How its work** (how to get the project into your system -- please follow the below steps one by one)
 
 1)	 *git clone https://github.com/yadunandankushwaha/Laravel-5.4-complete-project-with-administrator-panel-and-front-panel.git projectName*
 
