@@ -1,15 +1,19 @@
+
 **How its work**
 
-*Steps to run the Project*
-	1) Step 1 =>  *git clone https://github.com/yadunandankushwaha/Laravel-5.4-complete-project-with-administrator-panel-and-front-panel.git projectName*
-	2) Step 2 => (once clonning done go to project folder and run) *composer update*
-	3) Create and Change Database name from .env file (if .env file is not there please)
-	4) Run the command to get database tables:  *php artisan migrate*
-	5) Run seeder to insert data in tables eg. *php artisan db:seed --class=UsersTableSeeder*
-		(please check seeder folder to run and get more data in database tables like i did aove for user table)
-	6) Than run *php artisan serve*
-	7) Now hit the localhost with *localhost:8000* in your brower
-	
+1)	 *git clone https://github.com/yadunandankushwaha/Laravel-5.4-complete-project-with-administrator-panel-and-front-panel.git projectName*
+
+2)	(once clonning done go to project folder and run) *composer update*
+
+3)	Create and Change Database name from .env file (if .env file is not there please)
+
+4)	Run the command to get database tables:  *php artisan migrate*
+
+5)	Run seeder to insert data in tables eg. *php artisan db:seed --class=UsersTableSeeder* (please check seeder folder to run and get more data in database tables like i did aove for user table)
+
+6)	Than run *php artisan serve*
+
+7)	Now hit the localhost with *localhost:8000* in your brower
 
 **Main Components**
 
