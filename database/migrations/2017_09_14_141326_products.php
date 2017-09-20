@@ -17,7 +17,7 @@ class Products extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('code');
-            $table->int('cat_id');
+            $table->integer('cat_id');
             $table->string('quantity');
             $table->string('short_description');
             $table->longtext('description');
@@ -30,7 +30,7 @@ class Products extends Migration
             $table->string('seo_title');
             $table->string('seo_keywords');
             $table->string('seo_description');
-            $table->int('status');
+            $table->integer('status');
             $table->timestamps();
         });
     }

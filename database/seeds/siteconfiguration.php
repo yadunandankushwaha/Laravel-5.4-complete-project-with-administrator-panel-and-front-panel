@@ -12,7 +12,7 @@ class siteconfiguration extends Seeder
     public function run()
     {
         DB::table('siteconfiguration')->insert([
-    			['website_name' => 'Laravel','website_title'=>'A laravel Site','image'=>'logo.png'],
+    			['website_name' => 'Laravel','website_title'=>'A laravel Site','logo'=>'logo.png'],
     			
     	]);
     }
