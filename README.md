@@ -52,7 +52,7 @@
 
 **Administration Panel**
 
-1)	*Theme Integration in CI*
+1)	*Bootstrap Theme Integration for admin panel*
 
 2)	*Login for Admin*
 
